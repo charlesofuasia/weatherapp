@@ -28,12 +28,40 @@ function getLocalWeather(data){
 
     }
     function localWeatherDisplay(data){
+        
         const titlePage = document.querySelector("h2");
+        const box = document.querySelector("#cards");
         const myHead = `${data.address} Weather Forecast`;
         titlePage.textContent = myHead;
+        let i = 0;
+        for (i=0; i < 6; i++){
+            const card = document.createElement("section");
+            card.classList.add("card");
+            let cardHeader = document.createElement("h2");
+            let temp = document.createElement("p");
+            let humidity = document.createElement("p");
+            let forecastTemp = `${data.days[i].temp}`;
+            temp.textContent = forecastTemp;
+            let date = `${getWeekDay(data.days[i].datetime)}`;
+            cardHeader.textContent = date;
+            let hum = `${data.days[i].humidity}`;
+            humidity.textContent = hum;
+            card.appendChild(cardHeader);
+            card.appendChild(temp);
+            card.appendChild(humidity);
+            box.append(card);
+
+        }
 
 
     }
     getData()
+
+}
+function getWeekDay(dateString){
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+   const  date = new Date(dateString);
+   let day = date.getDay();
+   return days[day];
 
 }
