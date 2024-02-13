@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
+    <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
     <header>
@@ -17,10 +18,12 @@
     </header>
     <main>
       <h2></h2>
-      <label for="search">
-        Enter City: <input type="text" name="city" id="city" />
-      </label>
-      <button type="button" id="searchBtn">Get Forecast</button>
+      <div id="user-input">
+        <label for="search">
+          Enter City: <input type="text" name="city" id="city" />
+        </label>
+        <button type="button" id="searchBtn">Get Forecast</button>
+      </div>
       <div id="cards"></div>
     </main>
     <footer></footer>

@@ -30,7 +30,9 @@ function getLocalWeather(data) {
     localWeatherDisplay(wea);
   }
   function localWeatherDisplay(data) {
-    const myHead = `${data.address} Weather Forecast`;
+    const address = data.resolvedAddress;
+    const myHead = `${address} Weather Forecast`;
+    //console.log(data.resolvedAddress);
     titlePage.textContent = myHead;
     let i = 0;
     for (i = 0; i < 6; i++) {
@@ -39,15 +41,21 @@ function getLocalWeather(data) {
       let cardHeader = document.createElement("h2");
       let temp = document.createElement("p");
       let humidity = document.createElement("p");
+      let weatherDescription = document.createElement("p");
+      weatherDescription.innerHTML = data.days[i].description;
       let forecastTemp = `${data.days[i].temp}`;
       temp.textContent = forecastTemp;
+      let weatherIcon = document.createElement("img");
+      weatherIcon.src = getIcon(data.days[i].icon);
       let date = ` ${getWeekDay(data.days[i].datetime)} - ${
         data.days[i].datetime
       }`;
       cardHeader.textContent = date;
-      let hum = `${data.days[i].humidity}`;
+      let hum = `Humidity: ${data.days[i].humidity}%`;
       humidity.textContent = hum;
       card.appendChild(cardHeader);
+      card.appendChild(weatherDescription);
+      card.appendChild(weatherIcon);
       card.appendChild(temp);
       card.appendChild(humidity);
       box.append(card);
@@ -73,6 +81,10 @@ function getWeekDay(dateString) {
 search.addEventListener("click", () => {
   cards.innerHTML = "";
   let place = userInput.value;
-  // console.log(city);
   getLocalWeather(place);
 });
+
+function getIcon(data) {
+  let newString = data.replace(" ", "-");
+  return `images/${newString}.png`;
+}
