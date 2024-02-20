@@ -23,6 +23,10 @@ h1 {
   padding: 1rem;
   background-color: #f7f7fa;
 }
+.card:hover {
+  border: 3px solid #000;
+  background-color: #f1f1f1;
+}
 .card img {
   max-width: 50%;
   height: auto;
@@ -35,6 +39,7 @@ h1 {
   font-size: 2.2rem;
   font-weight: bold;
   padding: 1rem;
+  animation: sizes 3s linear 1s infinite alternate;
 }
 main {
   margin: 1rem;
@@ -63,13 +68,22 @@ label input {
 }
 button {
   display: block;
-  width: 95%;
-  max-width: 16rem;
   background-color: #0e2038;
   color: #f7f7fa;
-  padding: 0.4rem 0.5rem;
+  padding: 0.5rem 0.6rem;
   margin-top: 0.5rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+button:hover {
+  font-weight: bolder;
+}
+@keyframes sizes {
+  from {
+    font-size: 2.2rem;
+  }
+  to {
+    font-size: 1.8rem;
+  }
 }

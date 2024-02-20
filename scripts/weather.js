@@ -104,14 +104,19 @@ search.addEventListener("click", () => {
   saveHistory(place);
 });
 
-function getIcon(data) {
-  let newString = data.replace(" ", "-");
+function getIcon(item) {
+  let newString = item.replace(" ", "-");
   return `images/${newString}.png`;
 }
 
 function saveHistory(userInput) {
-  // let updatedHistory = history.push(userInput);
-  localStorage.setItem("history", JSON.stringify(userInput));
+  let history = JSON.parse(localStorage.getItem("history")) || [];
+  // if (!Array.isArray(history)) {
+  ////  history = [history];
+  // }
+
+  history.push(userInput);
+  localStorage.setItem("history", JSON.stringify(history));
   console.log(typeof localStorage.getItem("history"));
 }
 
