@@ -65,6 +65,8 @@ label input {
   display: block;
   width: 100%;
   max-width: 19rem;
+  padding: 0.6rem;
+  margin-left: 0.1rem;
 }
 button {
   display: block;

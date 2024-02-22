@@ -25,11 +25,15 @@ function getLocalWeather(data) {
   let place = data;
 
   async function getData() {
-    const res = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${place}?unitGroup=metric&key=M8BWB7V6NYYNKB8RAY576LEP8 `
-    );
-    const wea = await res.json();
-    localWeatherDisplay(wea);
+    try {
+      const res = await fetch(
+        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${place}?unitGroup=metric&key=M8BWB7V6NYYNKB8RAY576LEP8 `
+      );
+      const wea = await res.json();
+      localWeatherDisplay(wea);
+    } catch {
+      throw alert("Location not found");
+    }
   }
   function localWeatherDisplay(data) {
     const address = data.resolvedAddress;
@@ -98,8 +102,6 @@ function getWeekDay(dateString) {
 search.addEventListener("click", () => {
   cards.innerHTML = "";
   let place = userInput.value;
-  console.log(place);
-
   getLocalWeather(place);
   saveHistory(place);
 });
@@ -111,13 +113,8 @@ function getIcon(item) {
 
 function saveHistory(userInput) {
   let history = JSON.parse(localStorage.getItem("history")) || [];
-  // if (!Array.isArray(history)) {
-  ////  history = [history];
-  // }
-
   history.push(userInput);
   localStorage.setItem("history", JSON.stringify(history));
-  console.log(typeof localStorage.getItem("history"));
 }
 
 history.addEventListener("click", () => {
